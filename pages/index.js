@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import {IoIosArrowDown} from "react-icons/io"
+import {GiHamburgerMenu} from "react-icons/gi"
 
 export default function Home() {
   return (
@@ -12,16 +13,15 @@ export default function Home() {
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"></link>
-        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet"></link>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet"></link>
       </Head>
 
-      <main>
-        <div className='bg-gradient-to-b from-red-700 via-red-500 to-red-700 w-screen h-screen'>
-         
-         <div className='flex flex-col justify-center sm:flex-row sm:justify-start'>
+      <main className='relative bg-gradient-to-r from-red-800 via-red-600 to-red-800 w-screen h-screen'>
+        <div className='flex flex-col justify-center sm:flex-row sm:justify-start'>
+
             {/* Logo */}
           <div className='flex justify-center sm:justify-start'>
-            <div className='ml-4 relative w-fit mb-6'>
+            <div className='ml-5 relative w-fit mb-6'>
               <Image src={"/img/shoes.svg"} width={60} height={60} />
               <div className='font-PlayFair absolute top-[58px] -left-2 font-medium text-white whitespace-nowrap'>MY SHOES</div>
             </div>
@@ -34,10 +34,24 @@ export default function Home() {
               <div className='flex flex-row items-center gap-2 mx-2 cursor-pointer font-Lato'>KIDS <IoIosArrowDown/></div> 
               <div className='mx-2 cursor-pointer font-Lato'>COSTUMIZE</div>
           </nav>
-         </div>
+          
+          <div className='hidden cursor-pointer w-20 h-20 sm:flex sm:justify-center sm:items-center bg-neutral-700  shadow-2xl'>
+            <GiHamburgerMenu size={55} color='#FFFFFF'/>
+          </div>
 
-        </div> 
+        </div>
+
+        {/* Burger Menu */}
+          <div className='fixed flex cursor-pointer items-center inset-0 w-16 h-16 sm:hidden'>
+            <GiHamburgerMenu className='ml-1' size={55} color='#FFFFFF'/>
+          </div>
+
+        <div>
+          <Image src={"/img/shoes-hero.png"} width={450} height={450}/>
+        </div>
+
       </main>
+
     </div>
   )
 }
