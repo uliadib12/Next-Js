@@ -10,6 +10,7 @@ module.exports = {
       },
       fontFamily: {
         "PlayFair": ['Playfair Display'],
+        "Lato": ['Lato'],
       },
     },
   },
