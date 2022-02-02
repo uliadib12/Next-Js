@@ -7,7 +7,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         'hero-pattern': "url('/img/spectrum-gradient.svg')",
-      }
+      },
+      fontFamily: {
+        "PlayFair": ['Playfair Display'],
+      },
     },
   },
   plugins: [],
