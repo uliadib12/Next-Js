@@ -14,9 +14,10 @@ export default function Home() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"></link>
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet"></link>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet"></link>
       </Head>
 
-      <main className='relative bg-gradient-to-r from-red-800 via-red-600 to-red-800 w-screen h-screen'>
+      <main className='relative bg-gradient-to-r from-red-900 via-red-500 to-red-900 w-full min-h-screen pb-6'>
         <div className='flex flex-col justify-center sm:flex-row sm:justify-start'>
 
             {/* Logo */}
@@ -34,9 +35,10 @@ export default function Home() {
               <div className='flex flex-row items-center gap-2 mx-2 cursor-pointer font-Lato'>KIDS <IoIosArrowDown/></div> 
               <div className='mx-2 cursor-pointer font-Lato'>COSTUMIZE</div>
           </nav>
-          
-          <div className='hidden cursor-pointer w-20 h-20 sm:flex sm:justify-center sm:items-center bg-neutral-700  shadow-2xl'>
-            <GiHamburgerMenu size={55} color='#FFFFFF'/>
+
+          <div className='fixed hidden sm:flex flex-col h-screen right-0 shadow-xl'>
+            <GiHamburgerMenu className='bg-neutral-700 p-2 cursor-pointer' size={55} color='#FFFFFF'/>
+            <div className='bg-gradient-to-b from-red-500 to-red-900 h-full'>a</div>
           </div>
 
         </div>
@@ -46,8 +48,21 @@ export default function Home() {
             <GiHamburgerMenu className='ml-1' size={55} color='#FFFFFF'/>
           </div>
 
-        <div>
-          <Image src={"/img/shoes-hero.png"} width={450} height={450}/>
+
+        {/* Main Content */}
+        <div className='flex justify-center flex-col sm:mr-16'>
+          <div className='text-center'>
+            <Image src={"/img/shoes-hero.png"} width={450} height={450}/>
+          </div>
+          <div className='text-center mx-2 mt-4 md:hidden'>
+            <div className= 'text-white font-Inter font-extrabold text-6xl'>NIKE AIR JORDAN</div>
+            <div className= 'text-white mt-2'>MEN'S ORIGINAL</div>
+          </div>
+
+          <div className='flex justify-center mt-6'>
+            <div className='bg-neutral-700 cursor-pointer px-9 py-2 hover:scale-125 rounded-xl font-bold text-slate-200'>BUY NOW</div>
+          </div>
+
         </div>
 
       </main>
