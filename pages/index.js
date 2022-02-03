@@ -32,7 +32,7 @@ export default function Home() {
           </div>
 
           {/* NavBar */}
-          <nav className='text-white flex justify-center items-center sm:grow sm:justify-center sm:gap-7'>
+          <nav className='text-white flex justify-center items-center sm:grow sm:justify-center sm:gap-7 text-sm sm:text-base'>
               <div className='flex flex-row items-center gap-2 mx-2 cursor-pointer font-Lato'>MENS <IoIosArrowDown/></div> 
               <div className='flex flex-row items-center gap-2 mx-2 cursor-pointer font-Lato'>WOMEN <IoIosArrowDown/></div> 
               <div className='flex flex-row items-center gap-2 mx-2 cursor-pointer font-Lato'>KIDS <IoIosArrowDown/></div> 
@@ -66,8 +66,13 @@ export default function Home() {
 
         {/* Main Content */}
         <div className='flex justify-center flex-col sm:mr-16'>
-          <div className='text-center'>
+          <div className='relative text-center md:text-left md:flex md:justify-center'>
             <Image src={"/img/shoes-hero.png"} width={450} height={450}/>
+            <div className='hidden md:flex flex-col justify-center'>
+              <div className= 'text-white font-Inter font-extrabold text-5xl'>NIKE AIR JORDAN</div>
+              <div className= 'text-white'>MEN'S ORIGINAL</div>
+              <div className= 'text-white opacity-75 text-5xl'>$120</div>
+            </div>
           </div>
           <div className='text-center mx-2 mt-4 md:hidden'>
             <div className= 'text-white font-Inter font-extrabold text-6xl'>NIKE AIR JORDAN</div>
