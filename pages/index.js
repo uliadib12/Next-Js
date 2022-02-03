@@ -5,6 +5,7 @@ import {CgProfile} from "react-icons/cg"
 import {IoIosArrowDown, IoMdSearch} from "react-icons/io"
 import {GiHamburgerMenu} from "react-icons/gi"
 import {BsFillBagFill, BsFillShareFill} from "react-icons/bs"
+import {motion} from "framer-motion"
 
 export default function Home() {
   return (
@@ -67,7 +68,9 @@ export default function Home() {
         {/* Main Content */}
         <div className='flex justify-center flex-col sm:mr-16'>
           <div className='relative text-center md:text-left md:flex md:justify-center'>
-            <Image src={"/img/shoes-hero.png"} width={450} height={450}/>
+            <motion.div initial={{opacity: 0 , y:-30}} animate={{opacity: 1, y: 0}} transition={{duration: 1}}>
+              <Image src={"/img/shoes-hero.png"} width={450} height={450}/>
+            </motion.div>
             <div className='hidden md:flex flex-col justify-center'>
               <div className= 'text-white font-Inter font-extrabold text-5xl'>NIKE AIR JORDAN</div>
               <div className= 'text-white'>MEN'S ORIGINAL</div>
