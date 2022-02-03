@@ -1,7 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import {IoIosArrowDown} from "react-icons/io"
+import {IoLocationSharp} from "react-icons/io5"
+import {CgProfile} from "react-icons/cg"
+import {IoIosArrowDown, IoMdSearch} from "react-icons/io"
 import {GiHamburgerMenu} from "react-icons/gi"
+import {BsFillBagFill, BsFillShareFill} from "react-icons/bs"
 
 export default function Home() {
   return (
@@ -38,7 +41,19 @@ export default function Home() {
 
           <div className='fixed hidden sm:flex flex-col h-screen right-0 shadow-xl'>
             <GiHamburgerMenu className='bg-neutral-700 p-2 cursor-pointer' size={55} color='#FFFFFF'/>
-            <div className='bg-gradient-to-b from-red-500 to-red-900 h-full'>a</div>
+            <div className='bg-gradient-to-b from-red-500 to-red-900 h-full flex justify-center'>
+              <div className='flex flex-col grow'>
+                <div className='w-full flex justify-center flex-col items-center'>
+                  <BsFillBagFill className='scale-125 my-8 cursor-pointer' color='#FFFFFF'/>
+                  <IoLocationSharp className='scale-125 my-8 cursor-pointer' color='#FFFFFF'/>
+                  <CgProfile className='scale-125 my-8 cursor-pointer' color='#FFFFFF'/>
+                  <IoMdSearch className='scale-125 my-8 cursor-pointer' color='#FFFFFF'/>
+                </div>
+                <div className='w-full grow flex justify-center items-end'>
+                  <BsFillShareFill className='scale-125 my-8 cursor-pointer' color='#FFFFFF'/>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -57,9 +72,10 @@ export default function Home() {
           <div className='text-center mx-2 mt-4 md:hidden'>
             <div className= 'text-white font-Inter font-extrabold text-6xl'>NIKE AIR JORDAN</div>
             <div className= 'text-white mt-2'>MEN'S ORIGINAL</div>
+            <div className= 'text-white opacity-75'>$120</div>
           </div>
 
-          <div className='flex justify-center mt-6'>
+          <div className='flex justify-center mt-6 md:mt-2'>
             <div className='bg-neutral-700 cursor-pointer px-9 py-2 hover:scale-125 rounded-xl font-bold text-slate-200'>BUY NOW</div>
           </div>
 
