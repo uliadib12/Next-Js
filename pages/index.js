@@ -7,11 +7,15 @@ import {CgProfile} from "react-icons/cg"
 import {IoMdSearch} from "react-icons/io"
 import { Sidebar, SidebarList } from '../components/sidebar'
 import { Body } from '../components/body'
+import { Modal } from '../components/modal'
+import { createContext, useState } from 'react'
 
-
-const data = ["ORIGINAL", "AIR"]
+export const modalContex = createContext()
 
 export default function Home() {
+
+  const [modalShow, setmodalShow] = useState(false)
+
   return (
     <>
 
@@ -61,12 +65,16 @@ export default function Home() {
         </div>
         
           {/* Main Content */}
-          <Body
-          imgSrc = "/img/shoes-hero.png"
-          nameProduct= "NIKE AIR JORDAN"
-          category = "MEN'S ORIGINAL"
-          price = {120}
-          />
+          <modalContex.Provider value={{modalShow,setmodalShow}}>
+            <Body
+            imgSrc = "/img/shoes-hero.png"
+            nameProduct= "NIKE AIR JORDAN"
+            category = "MEN'S ORIGINAL"
+            price = {120}
+            />
+
+            <Modal/>
+          </modalContex.Provider>
 
       </main>
     </>

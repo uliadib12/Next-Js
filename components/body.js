@@ -1,7 +1,15 @@
 import Image from 'next/image'
 import {motion} from "framer-motion"
+import { useContext } from 'react'
+import { modalContex } from '../pages'
 
 export function Body(props) {
+
+  const modal = useContext(modalContex)
+
+  function setModal(){
+    modal.setmodalShow(true)
+  }
 
     return (
         <div className='flex justify-center flex-col sm:mr-16'>
@@ -23,7 +31,7 @@ export function Body(props) {
               </div>
 
               <div className='flex justify-start mt-6 md:mt-2'>
-                <div className='bg-neutral-800 border-2 cursor-pointer px-9 py-2 hover:scale-125 rounded-xl font-bold text-slate-200'>BUY NOW</div>
+                <button onClick={setModal} className='bg-neutral-800 border-2 cursor-pointer px-9 py-2 hover:scale-125 rounded-xl font-bold text-slate-200'>BUY NOW</button>
               </div>
 
             </div>
@@ -37,7 +45,7 @@ export function Body(props) {
           </div>
 
           <div className='flex md:hidden justify-center mt-6 md:mt-2'>
-            <div className='bg-neutral-800 border-2 cursor-pointer px-9 py-2 hover:scale-125 rounded-xl font-bold text-slate-200'>BUY NOW</div>
+            <button onClick={setModal} className='bg-neutral-800 border-2 cursor-pointer px-9 py-2 hover:scale-125 rounded-xl font-bold text-slate-200'>BUY NOW</button>
           </div>
         </div>
     )
