@@ -1,5 +1,8 @@
 import {GiHamburgerMenu} from "react-icons/gi"
 import {BsFillShareFill} from "react-icons/bs"
+import Link from "next/link"
+import { cartContex } from "./modal"
+import { useContext } from "react"
 
 export function Sidebar(props) {
     return (
@@ -11,9 +14,9 @@ export function Sidebar(props) {
                 <div className='w-full flex justify-center flex-col items-center'>
                   {props.children}
                 </div>
-                <div className='w-full grow flex justify-center items-end'>
-                  <BsFillShareFill className='scale-125 my-8 cursor-pointer hover:scale-150' color='#FFFFFF'/>
-                </div>
+                  <div className='w-full grow flex justify-center items-end'>
+                    <BsFillShareFill className='scale-125 my-8 cursor-pointer hover:scale-150' color='#FFFFFF'/>
+                  </div>
               </div>
             </div>
           </div>
@@ -28,8 +31,14 @@ export function Sidebar(props) {
 
 export function SidebarList(props) {
 
+  const cartCon = useContext(cartContex)
+  
     return (
-        <props.icon className='scale-125 my-8 cursor-pointer hover:scale-150' color={`${props.color ? props.color : "#FFFFFF"}`}/>
+      <Link href={props.href ? props.href : ""}>
+        <div className="relative cursor-pointer">
+          <props.icon className='scale-125 my-8 hover:scale-150' color={`${props.color ? props.color : "#FFFFFF"}`}/>
+          {props.carts && cartCon.cart.length ? <div className="absolute bg-red-400 text-white w-4 h-4 bottom-5 rounded-full -right-1 font-bold text-center flex justify-center items-center">{cartCon.cart.length}</div> : <></>}
+        </div>
+      </Link>
     )
 }
-
