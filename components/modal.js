@@ -33,7 +33,7 @@ export function ModalView(props) {
     return (
        <div className="lg:flex block lg:flex-row flex-col h-full">
            <div className="overflow-hidden pb-5 flex justify-center Shrink items-center">
-            <img src="/img/shoes-hero.png" className="h-full"/>
+            <img src="/img/shoes-hero.png" className="h-full w-full"/>
            </div>
            <div className="py-9 lg:px-0 px-4 grow lg:w-fit">
                 <form class="pl-8 lg:pr-24 pr-8 pt-6 pb-8 mb-4 w-full">
