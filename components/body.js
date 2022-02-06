@@ -12,9 +12,9 @@ export function Body(props) {
   }
 
     return (
-        <div className='flex justify-center flex-col sm:mr-16'>
-          <div className='relative text-center md:text-left md:flex md:justify-center'>
-            <motion.div className='mr-16' initial={{opacity: 0 , y:-30}} animate={{opacity: 1, y: 0}} transition={{duration: 1}} 
+        <div className='flex justify-center flex-col sm:mr-16 grow'>
+          <div className='relative text-center md:text-left md:flex md:justify-center items-center'>
+            <motion.div className='' initial={{opacity: 0 , y:-30}} animate={{opacity: 1, y: 0}} transition={{duration: 1}} 
               whileHover={{
               scale: 1.05,
               transition: { duration: 0.4 },
@@ -22,7 +22,7 @@ export function Body(props) {
               <Image src={props.imgSrc} width={450} height={450}/>
             </motion.div>
 
-            <div className='hidden md:flex flex-col justify-center'>
+            <div className='hidden md:flex sm:ml-6 flex-col justify-center'>
 
               <div className='hidden md:flex flex-col justify-center mb-6'>
                 <div className= 'text-white font-Inter font-extrabold text-5xl'>{props.nameProduct}</div>

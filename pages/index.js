@@ -30,7 +30,7 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet"></link>
       </Head>
 
-      <main className='relative bg-gradient-to-r from-red-900 via-red-500 to-red-900 w-full min-h-screen pb-6'>
+      <main className='relative flex flex-col bg-gradient-to-r from-red-900 via-red-500 to-red-900 w-screen min-h-screen pb-6'>
         
         <div id='topBar' className='flex flex-col justify-center sm:flex-row sm:justify-start'>
 
