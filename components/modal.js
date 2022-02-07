@@ -17,7 +17,7 @@ export function Modal(props) {
             <div onClick={()=>{modal.setmodalShow(false)}} style={{backgroundColor: 'rgba(0, 0, 0, 0.4)'}} className="fixed flex justify-center items-center inset-0 w-screen h-screen">
                 <div onClick={(event)=>{event.stopPropagation()}} style={{backgroundColor: 'rgba(255, 255, 255, 1)'}} className="relative sm:w-3/4 w-11/12 h-4/5 rounded-xl shadow-lg overflow-y-auto">
                     <GrClose onClick={()=>{modal.setmodalShow(false)}} size={isScreen ? 30 : 40} className=" absolute right-5 top-5 cursor-pointer"/>
-                    <ModalView imgSrc={props.imgSrc} produk = {props.nameProduct} />
+                    <ModalView imgSrc={props.imgSrc} produk = {props.nameProduct} price={props.price} />
                 </div>
             </div>
         </div>
@@ -32,6 +32,7 @@ export function ModalView(props) {
     const [alamat, setalamat] = useState("")
     const [wallet, setwallet] = useState("")
     const produk = props.produk
+    const price = props.price
 
     const cartCon = useContext(cartContex)
     
@@ -42,7 +43,7 @@ export function ModalView(props) {
 
     function onCart(){
         if(count && nama && alamat && wallet){
-            var obj = {uuid: uuidv4(),count,nama,alamat,wallet,produk}
+            var obj = {uuid: uuidv4(),count,nama,alamat,wallet,produk, price: price*count}
             cartCon.setcart([...cartCon.cart,obj])
             setcount(1)
             setnama("")

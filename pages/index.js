@@ -68,12 +68,12 @@ const [modalShow, setmodalShow] = useState(false)
           <modalContex.Provider value={{modalShow,setmodalShow}}>
             <Body
             imgSrc = "/img/shoes-hero.png"
-            nameProduct= "NIKE AIR JORDAN"
+            nameProduct= "NIKE AIR"
             category = "MEN'S ORIGINAL"
             price = {120}
             />
 
-            <Modal nameProduct= "NIKE AIR JORDAN" imgSrc = "/img/shoes-hero.png"/>
+            <Modal nameProduct= "NIKE AIR" imgSrc = "/img/shoes-hero.png" price = {120}/>
           </modalContex.Provider>
 
       </main>

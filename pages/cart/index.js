@@ -45,6 +45,9 @@ export default function MyCart() {
                   <div>
                     {`Banyak: ${data.count}`}
                   </div>
+                  <div>
+                    {`Total Harga: ${data.price}`}
+                  </div>
                 </div>
 
                 <div className='p-8'>
