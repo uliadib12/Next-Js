@@ -3,6 +3,7 @@ import { modalContex } from "../pages"
 import { GrClose } from "react-icons/gr"
 import { useMediaQuery } from 'react-responsive'
 import { BsCartPlusFill } from "react-icons/bs"
+import { v4 as uuidv4 } from 'uuid';
 
 export function Modal(props) {
     
@@ -41,7 +42,7 @@ export function ModalView(props) {
 
     function onCart(){
         if(count && nama && alamat && wallet){
-            var obj = {count,nama,alamat,wallet,produk}
+            var obj = {uuid: uuidv4(),count,nama,alamat,wallet,produk}
             cartCon.setcart([...cartCon.cart,obj])
             setcount(1)
             setnama("")

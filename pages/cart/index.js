@@ -1,10 +1,14 @@
 import Head from 'next/head'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { cartContex } from '../../components/modal'
 
 export default function MyCart() {
 
   const cartCon = useContext(cartContex)
+  
+  function onDelete(id){
+    cartCon.setcart(cartCon.cart.filter(cart => cart.uuid !== id))
+  }
 
     return (
     <div>
@@ -22,21 +26,33 @@ export default function MyCart() {
         <ul>
           {cartCon.cart.map((data, index)=>{
             return (
-            <li className='mb-5'>
-              <div>
-                {`${index + 1}. Nama: ${data.nama}`}
-              </div>
-              <div>
-                {`Alamat: ${data.alamat}`}
-              </div>
-              <div>
-                {`WalletID: ${data.wallet}`}
-              </div>
-              <div>
-                {`Produk: ${data.produk}`}
-              </div>
-              <div>
-                {`Banyak: ${data.count}`}
+            <li key={index} className='mb-5'>
+              <div className='bg-gray-300 p-3 flex justify-between items-center'>
+
+                <div>
+                  <div>
+                    {`${index + 1}. Nama: ${data.nama}`}
+                  </div>
+                  <div>
+                    {`Alamat: ${data.alamat}`}
+                  </div>
+                  <div>
+                    {`WalletID: ${data.wallet}`}
+                  </div>
+                  <div>
+                    {`Produk: ${data.produk}`}
+                  </div>
+                  <div>
+                    {`Banyak: ${data.count}`}
+                  </div>
+                </div>
+
+                <div className='p-8'>
+                  <div onClick={()=>{onDelete(data.uuid)}} className='bg-red-500 cursor-pointer'>
+                    Delete
+                  </div>
+                </div>
+
               </div>
             </li>)
           })}
