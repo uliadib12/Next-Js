@@ -17,7 +17,7 @@ export function Modal(props) {
             <div onClick={()=>{modal.setmodalShow(false)}} style={{backgroundColor: 'rgba(0, 0, 0, 0.4)'}} className="fixed flex justify-center items-center inset-0 w-screen h-screen">
                 <div onClick={(event)=>{event.stopPropagation()}} style={{backgroundColor: 'rgba(255, 255, 255, 1)'}} className="relative sm:w-3/4 w-11/12 h-4/5 rounded-xl shadow-lg overflow-y-auto">
                     <GrClose onClick={()=>{modal.setmodalShow(false)}} size={isScreen ? 30 : 40} className=" absolute right-5 top-5 cursor-pointer"/>
-                    <ModalView imgSrc={props.imgSrc} produk = {props.nameProduct} price={props.price} />
+                    <ModalView fun={props.fun} imgSrc={props.imgSrc} produk = {props.nameProduct} price={props.price} />
                 </div>
             </div>
         </div>
@@ -35,10 +35,16 @@ export function ModalView(props) {
     const price = props.price
 
     const cartCon = useContext(cartContex)
-    
-    
-    function onBuy(){
-        
+
+    useEffect(() => {
+        if(modal.onClick)
+            sendData();
+    }, [modal.onClick])
+
+    function onBuy() {
+        if(count && nama && alamat && wallet){
+            modal.setwalletShow(true)
+        }
     }
 
     function onCart(){
@@ -52,6 +58,24 @@ export function ModalView(props) {
             modal.setmodalShow(false)
         }
     }
+
+    function sendData() {
+        if(count && nama && alamat && wallet){
+            var obj = {nama,alamat,count,wallet}
+            setcount(1)
+            setnama("")
+            setalamat("")
+            setwallet("")
+        }
+        props.fun(obj)
+    }
+
+    // useEffect(() => {
+    //     setcount(1)
+    //     setnama("")
+    //     setalamat("")
+    //     setwallet("")
+    // }, [modal.modalShow])
     
     return (
        <div className="lg:flex block lg:flex-row flex-col h-full">
@@ -83,12 +107,12 @@ export function ModalView(props) {
                             <div className="mb-1 font-bold">Count</div>
                             <div className="flex items-center">
                                 <button onClick={(e)=>{e.preventDefault(); if(count > 1){setcount(count - 1)}}} className="bg-blue-500 hover:bg-blue-700 rounded-lg p-2 font-extrabold text-white">{"<"}</button>
-                                <div className="text-blue-500 p-2">{count}</div>
+                                <div className="text-blue-500 p-2 text-lg font-bold">{count}</div>
                                 <button onClick={(e)=>{e.preventDefault(); setcount(count + 1)}} className="bg-blue-500 hover:bg-blue-700 rounded-lg p-2 font-extrabold text-white">{">"}</button>
                             </div>
                         </div>
                         <div>
-                            <button onClick={(e)=>{e.preventDefault()}} className="bg-blue-500 hover:bg-blue-700 hover:font-extrabold mr-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                            <button onClick={(e)=>{e.preventDefault(); onBuy()}} className="bg-blue-500 hover:bg-blue-700 hover:font-extrabold mr-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                                 BUY IT
                             </button>
                             <button onClick={(e)=>{e.preventDefault(); onCart()}} className="bg-white hover:font-extrabold text-blue-500 border-blue-500 border-2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">

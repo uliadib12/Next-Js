@@ -46,7 +46,7 @@ export default function MyCart() {
                     {`Banyak: ${data.count}`}
                   </div>
                   <div>
-                    {`Total Harga: ${data.price}`}
+                    {`Total Harga: $${data.price}`}
                   </div>
                 </div>
 

@@ -8,14 +8,33 @@ import {IoMdSearch} from "react-icons/io"
 import { Sidebar, SidebarList } from '../components/sidebar'
 import { Body } from '../components/body'
 import { Modal } from '../components/modal'
-import { createContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 export const modalContex = createContext()
 
 export default function Home() {
 
-const [modalShow, setmodalShow] = useState(false)
+  const [modalShow, setmodalShow] = useState(false)
+  const [walletShow, setwalletShow] = useState(false)
+  const [walletPass, setwalletPass] = useState("")
+  const [onClick, setonClick] = useState(false)
 
+  useEffect(() => {
+    setwalletPass("")
+    setonClick(false)
+  }, [modalShow,walletShow])
+  
+
+  function getData(obj) {
+    if(obj){
+      const nama = obj.nama
+      const alamat = obj.alamat
+      const count = obj.count
+      const wallet = obj.wallet
+      console.log(`Nama: ${nama} Alamat: ${alamat} Count: ${count} Wallet: ${wallet} WalletPass: ${walletPass}`)
+      setwalletShow(false)
+    }
+  }
   return (
     <>
 
@@ -65,7 +84,7 @@ const [modalShow, setmodalShow] = useState(false)
         </div>
         
           {/* Main Content */}
-          <modalContex.Provider value={{modalShow,setmodalShow}}>
+          <modalContex.Provider value={{modalShow,setmodalShow,walletShow,setwalletShow,onClick,setonClick}}>
             <Body
             imgSrc = "/img/shoes-hero.png"
             nameProduct= "NIKE AIR"
@@ -73,8 +92,24 @@ const [modalShow, setmodalShow] = useState(false)
             price = {120}
             />
 
-            <Modal nameProduct= "NIKE AIR" imgSrc = "/img/shoes-hero.png" price = {120}/>
+            <Modal nameProduct= "NIKE AIR" imgSrc = "/img/shoes-hero.png" price = {120} fun={getData}/>
+
           </modalContex.Provider>
+
+          {modalShow && walletShow && <div className='absolute inset-0 flex justify-center items-center pointer-events-none'>
+            <div className='pointer-events-auto bg-white w-80 h-48 rounded-lg border-blue-200 border-4 p-4'>
+              <div className='font-bold text-lg'>
+                Wallet Pass
+              </div>
+              <div className="mt-6 mb-6">
+                <input value={walletPass} onChange={(e)=>{setwalletPass(e.target.value)}} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="walletPass" type="password" placeholder="*******"/>
+              </div>
+              <div className='flex gap-2 justify-end'>
+                <button onClick={() => {setonClick(true)}} className='p-2 hover:scale-110 bg-blue-500 rounded-md font-bold text-white'>OK</button>
+                <button onClick={() => {setwalletShow(false)}} className='p-2 hover:scale-110 bg-blue-500 rounded-md font-bold text-white'>CANCLE</button>
+              </div>
+            </div>
+          </div>}
 
       </main>
     </>

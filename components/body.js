@@ -17,6 +17,7 @@ export function Body(props) {
 
   function setModal(){
     modal.setmodalShow(true)
+    modal.setwalletShow(false)
   }
 
     return (
