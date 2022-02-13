@@ -28,7 +28,7 @@ export function Body(props) {
               scale: 1.05,
               transition: { duration: 0.4 },
             }}>
-              <Image priority={false} src={props.imgSrc} width={450} height={450}/>
+              <Image priority={true} src={props.imgSrc} width={450} height={450}/>
             </motion.div>
 
             <div className='hidden md:flex sm:ml-6 flex-col justify-center'>

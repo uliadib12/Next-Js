@@ -61,21 +61,17 @@ export function ModalView(props) {
 
     function sendData() {
         if(count && nama && alamat && wallet){
-            var obj = {nama,alamat,count,wallet}
-            setcount(1)
-            setnama("")
-            setalamat("")
-            setwallet("")
+            var obj = {nama,alamat,count,wallet,produk}
         }
         props.fun(obj)
     }
 
-    // useEffect(() => {
-    //     setcount(1)
-    //     setnama("")
-    //     setalamat("")
-    //     setwallet("")
-    // }, [modal.modalShow])
+    useEffect(() => {
+        setcount(1)
+        setnama("")
+        setalamat("")
+        setwallet("")
+    }, [modal.modalShow])
     
     return (
        <div className="lg:flex block lg:flex-row flex-col h-full">
