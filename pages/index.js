@@ -71,7 +71,7 @@ export default function Home() {
             notifyErr(data.databaseErr)
           }
           else{
-            console.log(err.response)
+            // console.log(err.response)
             notifyErr('ERROR!!')
           }
         })
