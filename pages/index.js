@@ -18,6 +18,7 @@ import getConfig from 'next/config'
 export const modalContex = createContext()
 
 export default function Home() {
+  console.log(`${publicRuntimeConfig.API_URL}`)
   const { publicRuntimeConfig } = getConfig()
   const notifySucc = () => {toast.success("SUCCESS!!")};
   const notifyErr = (err) => {toast.error(`${err}`)};
