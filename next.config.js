@@ -1,4 +1,10 @@
+require('dotenv').config()
+
 module.exports = {
+  publicRuntimeConfig: {
+    // Will be available on both server and client
+    API_URL: process.env.API_URL,
+  },
   reactStrictMode: true,
-  swcMinify: false, // it should be false by default 
+  swcMinify: false,
 }

@@ -13,10 +13,12 @@ import { ThreeDots } from 'react-loader-spinner'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
+import getConfig from 'next/config'
 
 export const modalContex = createContext()
 
 export default function Home() {
+  const { publicRuntimeConfig } = getConfig()
   const notifySucc = () => {toast.success("SUCCESS!!")};
   const notifyErr = (err) => {toast.error(`${err}`)};
   const [modalShow, setmodalShow] = useState(false)
@@ -42,7 +44,7 @@ export default function Home() {
       const produk = obj.produk
       // console.log(`Nama: ${nama} Alamat: ${alamat} Count: ${count} Wallet: ${wallet} WalletPass: ${walletPass}`)
       if(walletPass){
-        axios.post('http://localhost:8000/api/buy',{
+        axios.post(`${publicRuntimeConfig.API_URL}`,{
           nama,
           alamat,
           count,
