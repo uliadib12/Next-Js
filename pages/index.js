@@ -51,7 +51,7 @@ export default function Home() {
           count,
           wallet,
           walletPass,
-          produk
+          "produk": "Nike Air"
         }).then((res)=>{
           // console.log(res.data,"Respone")
           setloading(false)
@@ -68,6 +68,7 @@ export default function Home() {
           }
           else if(data.hasOwnProperty('databaseErr')){
             // console.log(data.databaseErr)
+            // console.log(err.response)
             notifyErr(data.databaseErr)
           }
           else{
