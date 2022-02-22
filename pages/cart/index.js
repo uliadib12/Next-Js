@@ -135,17 +135,13 @@ export default function MyCart() {
                   </div>
                 </div>
 
-                <div className='flex'>
-                  <div className='p-8'>
+                <div className='flex gap-3'>
                     <div onClick={()=>{clearWallet();onBuy(data)}} className='bg-green-500 text-white cursor-pointer px-2 py-1 rounded-md'>
                       Buy
                     </div>
-                  </div>
-                  <div className='p-8'>
                     <div onClick={()=>{clearWallet();onDelete(data.uuid)}} className='bg-red-500 text-white cursor-pointer px-2 py-1 rounded-md'>
                       Delete
                     </div>
-                  </div>
                 </div>
 
               </div>
