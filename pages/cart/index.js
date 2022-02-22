@@ -1,13 +1,100 @@
+import axios from 'axios';
+import getConfig from 'next/config';
 import Head from 'next/head'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { ThreeDots } from 'react-loader-spinner'
+import { toast, ToastContainer } from 'react-toastify';
 import { cartContex } from '../../components/modal'
 
 export default function MyCart() {
+  
+  const { publicRuntimeConfig } = getConfig()
+  const notifySucc = () => {toast.success("SUCCESS!!")};
+  const notifyErr = (err) => {toast.error(`${err}`)};
+  const [data, setdata] = useState({})
+  const [showWallet, setshowWallet] = useState(false)
+  const [walletId, setwalletId] = useState("")
+  const [walletPass, setwalletPass] = useState("")
+  const [loading, setloading] = useState(false)
 
   const cartCon = useContext(cartContex)
   
   function onDelete(id){
     cartCon.setcart(cartCon.cart.filter(cart => cart.uuid !== id))
+  }
+
+  function onBuy(data){
+    setshowWallet(true)
+    setdata(data)
+  }
+
+  function onClick(){
+    const datas = {...data,"wallet": walletId, "walletPass": walletPass}
+    if(!datas){
+      return
+    }
+    const notAllowed = ['uuid', 'price'];
+    
+    const filtered = Object.fromEntries(
+      Object.entries(datas).filter(
+         ([key, val])=>!notAllowed.includes(key)
+      )
+   );
+    console.log(filtered)
+    getData(filtered)
+  }
+
+  function getData(obj) {
+    if(!obj){
+      return
+    }
+    const nama = obj.nama
+    const alamat = obj.alamat
+    const count = obj.count
+    const wallet = obj.wallet
+    const walletPass = obj.walletPass
+    const produk = obj.produk
+    // console.log(`Nama: ${nama} Alamat: ${alamat} Count: ${count} Wallet: ${wallet} WalletPass: ${walletPass}`)
+    if(walletPass){
+      setloading(true)
+      axios.post(`${publicRuntimeConfig.API_URL}`,{
+        "nama": nama,
+        "alamat": alamat,
+        "count": count,
+        "wallet": wallet,
+        "walletPass": walletPass,
+        "produk": produk
+      }).then((res)=>{
+        // console.log(res.data,"Respone")
+        setloading(false)
+        notifySucc()
+        setmodalShow(false)
+      }).catch((err)=>{
+        // console.log(err.response)
+        // console.log(err.response.data)
+        setloading(false)
+        const data = err.response.data
+        if(data.hasOwnProperty('message')){
+          // console.log(data.message)
+          notifyErr("Form Error")
+        }
+        else if(data.hasOwnProperty('databaseErr')){
+          // console.log(data.databaseErr)
+          // console.log(err.response)
+          notifyErr(data.databaseErr)
+        }
+        else{
+          // console.log(err.response)
+          notifyErr('ERROR!!')
+        }
+      })
+    }
+  }
+
+
+  function clearWallet(){
+    setwalletId("")
+    setwalletPass("")
   }
 
     return (
@@ -23,6 +110,7 @@ export default function MyCart() {
       </main>
 
       <div>
+      <ToastContainer/>
         <ul>
           {cartCon.cart.map((data, index)=>{
             return (
@@ -37,9 +125,6 @@ export default function MyCart() {
                     {`Alamat: ${data.alamat}`}
                   </div>
                   <div>
-                    {`WalletID: ${data.wallet}`}
-                  </div>
-                  <div>
                     {`Produk: ${data.produk}`}
                   </div>
                   <div>
@@ -50,9 +135,16 @@ export default function MyCart() {
                   </div>
                 </div>
 
-                <div className='p-8'>
-                  <div onClick={()=>{onDelete(data.uuid)}} className='bg-red-500 cursor-pointer'>
-                    Delete
+                <div className='flex'>
+                  <div className='p-8'>
+                    <div onClick={()=>{clearWallet();onBuy(data)}} className='bg-green-500 text-white cursor-pointer px-2 py-1 rounded-md'>
+                      Buy
+                    </div>
+                  </div>
+                  <div className='p-8'>
+                    <div onClick={()=>{clearWallet();onDelete(data.uuid)}} className='bg-red-500 text-white cursor-pointer px-2 py-1 rounded-md'>
+                      Delete
+                    </div>
                   </div>
                 </div>
 
@@ -60,6 +152,33 @@ export default function MyCart() {
             </li>)
           })}
         </ul>
+        {showWallet && <div className='fixed inset-0 flex justify-center items-center pointer-events-none'>
+            <div className='pointer-events-auto bg-white w-80 min-h-48 rounded-lg border-blue-200 border-4 p-4'>
+              <div className='font-bold text-lg'>
+                Wallet
+              </div>
+              {!loading ? 
+              <>
+              <div className="mt-6 mb-1">
+                <input value={walletId} onChange={(e)=>{setwalletId(e.target.value)}} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="walletPass" type="name" placeholder="Wallet Id"/>
+              </div>
+              <div className="mt-6 mb-6">
+                <input value={walletPass} onChange={(e)=>{setwalletPass(e.target.value)}} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="walletPass" type="password" placeholder="Wallet Pass"/>
+              </div>
+              <div className='flex gap-2 justify-end'>
+                <button onClick={() => {if(walletId && walletPass){onClick()}}} className='p-2 hover:scale-110 bg-blue-500 rounded-md font-bold text-white'>OK</button>
+                <button onClick={() => {setshowWallet(false)}} className='p-2 hover:scale-110 bg-blue-500 rounded-md font-bold text-white'>CANCLE</button>
+              </div>
+              </>
+               : 
+               <>
+                <div className='mt-6 flex flex-col justify-center items-center'>
+                  <div>Loading...</div>
+                  <div><ThreeDots color="#0098FF" height={80} width={80} /></div>
+                </div>
+               </>}
+            </div>
+          </div>}
       </div>
     </div>
     )

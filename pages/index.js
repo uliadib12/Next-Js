@@ -46,12 +46,12 @@ export default function Home() {
       // console.log(`Nama: ${nama} Alamat: ${alamat} Count: ${count} Wallet: ${wallet} WalletPass: ${walletPass}`)
       if(walletPass){
         axios.post(`${publicRuntimeConfig.API_URL}`,{
-          nama,
-          alamat,
-          count,
-          wallet,
-          walletPass,
-          "produk": "Nike Air"
+          "nama": nama,
+          "alamat": alamat,
+          "count": count,
+          "wallet": wallet,
+          "walletPass": walletPass,
+          "produk": produk
         }).then((res)=>{
           // console.log(res.data,"Respone")
           setloading(false)
@@ -136,7 +136,7 @@ export default function Home() {
             price = {120}
             />
 
-            <Modal nameProduct= "NIKE AIR" imgSrc = "/img/shoes-hero.png" price = {120} fun={getData}/>
+            <Modal nameProduct= "Nike Air" imgSrc = "/img/shoes-hero.png" price = {120} fun={getData}/>
 
           </modalContex.Provider>
 

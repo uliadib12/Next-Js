@@ -49,7 +49,7 @@ export function ModalView(props) {
 
     function onCart(){
         if(count && nama && alamat && wallet){
-            var obj = {uuid: uuidv4(),count,nama,alamat,wallet,produk, price: price*count}
+            var obj = {uuid: uuidv4(),count,nama,alamat,produk, price: price*count}
             cartCon.setcart([...cartCon.cart,obj])
             setcount(1)
             setnama("")
