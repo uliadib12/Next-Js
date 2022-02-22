@@ -33,11 +33,12 @@ export default function MyCart() {
     if(!datas){
       return
     }
-    const notAllowed = ['uuid', 'price'];
+    // const notAllowed = ['uuid', 'price'];
+    const allow = ['nama', 'alamat', 'count', 'wallet', 'walletPass', 'produk'];
     
     const filtered = Object.fromEntries(
       Object.entries(datas).filter(
-         ([key, val])=>!notAllowed.includes(key)
+         ([key, val])=>allow.includes(key)
       )
    );
     console.log(filtered)
